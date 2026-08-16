@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>उदय टाइम न्यूज़ | Uday Time News</title>
+  <meta name="description" content="उदय टाइम न्यूज़ — छतरपुर, मध्य प्रदेश और देश-दुनिया की ताज़ा खबरें।">
+  <style>
+    :root{
+      --ink:#111;
+      --muted:#666;
+      --line:#d9d9d9;
+      --paper:#fff;
+      --soft:#f5f5f5;
+      --accent:#b40000;
+      --accent2:#7d0000;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:#ededed;color:var(--ink);font-family:Georgia,"Noto Serif Devanagari","Nirmala UI",serif}
+    a{color:inherit;text-decoration:none}
+    .page{max-width:1180px;margin:auto;background:var(--paper);min-height:100vh}
+    .topbar{background:#111;color:#fff;padding:8px 18px;font:14px/1.4 Arial,sans-serif;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+    .lang-switch{display:flex;gap:6px;align-items:center}
+    .lang-btn{border:1px solid #777;background:#222;color:#fff;border-radius:4px;padding:5px 9px;cursor:pointer;font:700 12px Arial,sans-serif}
+    .lang-btn.active{background:#b40000;border-color:#b40000}
+     .masthead{padding:14px 18px;border-bottom:3px solid #111}
+    .masthead-inner{display:grid;grid-template-columns:150px 1fr 230px;align-items:center;gap:18px;max-width:1100px;margin:auto}
+    .mast-photo{display:flex;align-items:center;gap:10px}
+    .mast-photo img{width:92px;height:92px;object-fit:cover;border:3px solid #111;border-radius:4px}
+    .photo-caption{font:700 11px/1.25 Arial,sans-serif;color:#555;white-space:pre-line}
+    .mast-copy{text-align:center}
+    .mast-copy .brand{font-size:clamp(34px,6vw,64px);font-weight:900;letter-spacing:-1px}
+    .mast-copy .brand span{color:var(--accent)}
+    .mast-copy .tagline{font:600 13px Arial,sans-serif;color:#666;margin-top:4px;letter-spacing:.4px}
+    .mast-prompt{border-left:1px solid #ccc;padding-left:16px}
+    .mast-prompt strong{display:block;font-size:18px;line-height:1.15;margin-bottom:5px}
+    .mast-prompt span{font:700 11px/1.35 Arial,sans-serif;color:#666}
+    .brand{font-size:clamp(34px,6vw,64px);font-weight:900;letter-spacing:-1px}
+    .brand span{color:var(--accent)}
+    .tagline{font:600 13px Arial,sans-serif;color:#666;margin-top:4px;letter-spacing:.4px}
+    nav{display:flex;gap:0;overflow:auto;border-bottom:1px solid var(--line);background:#fff;white-space:nowrap}
+    nav a{padding:13px 15px;font:700 14px Arial,sans-serif;border-right:1px solid var(--line)}
+    nav a:hover{background:#f5f5f5;color:var(--accent)}
+    .ticker{display:flex;align-items:center;border-bottom:1px solid var(--line);background:#fafafa}
+    .ticker b{background:var(--accent);color:#fff;padding:10px 14px;font:700 13px Arial,sans-serif}
+    .ticker span{padding:0 12px;font-size:15px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    main{padding:18px}
+    .hero{display:grid;grid-template-columns:2fr 1fr;gap:18px;border-bottom:2px solid #111;padding-bottom:18px}
+    .lead{min-height:330px;background:linear-gradient(135deg,#252525,#777);color:#fff;padding:28px;display:flex;flex-direction:column;justify-content:flex-end;position:relative;overflow:hidden}
+    .lead:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 25% 20%,rgba(255,255,255,.2),transparent 35%);opacity:.7}
+    .lead>*{position:relative}
+    .label{display:inline-block;width:max-content;background:var(--accent);color:#fff;padding:5px 9px;font:700 11px Arial,sans-serif;text-transform:uppercase}
+    .lead h1{font-size:clamp(28px,4vw,46px);line-height:1.08;margin:12px 0 8px}
+    .meta{font:12px Arial,sans-serif;opacity:.85}
+    .side{display:grid;gap:14px}
+    .side-card{padding:14px;border-bottom:1px solid var(--line)}
+    .side-card:last-child{border-bottom:0}
+    .side-card h3{margin:8px 0 4px;font-size:22px;line-height:1.2}
+    .side-card p{margin:0;color:var(--muted);font-size:14px;line-height:1.5}
+    .section-title{display:flex;justify-content:space-between;align-items:end;margin:22px 0 12px;border-bottom:3px solid #111;padding-bottom:7px}
+    .section-title h2{margin:0;font-size:28px}
+    .section-title a{font:700 12px Arial,sans-serif;color:var(--accent)}
+    .news-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .card{border:1px solid var(--line);background:#fff}
+    .thumb{height:145px;background:linear-gradient(135deg,#ddd,#aaa);display:flex;align-items:center;justify-content:center;color:#555;font:700 14px Arial,sans-serif}
+    .card-body{padding:13px}
+    .card h3{margin:7px 0 6px;font-size:20px;line-height:1.25}
+    .card p{margin:0 0 8px;color:#666;font-size:14px;line-height:1.45}
+    .smallmeta{font:11px Arial,sans-serif;color:#888}
+    .footer{margin-top:28px;background:#111;color:#fff;padding:28px 18px}
+    .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:25px}
+    .footer h3{margin-top:0}
+    .footer p,.footer a{font:14px/1.7 Arial,sans-serif;color:#ccc}
+    .copyright{border-top:1px solid #333;margin-top:22px;padding-top:14px;color:#aaa;font:12px Arial,sans-serif}
+    @media(max-width:800px){
+      .masthead-inner{grid-template-columns:1fr;text-align:center}
+      .mast-photo{justify-content:center}
+      .mast-prompt{border-left:0;border-top:1px solid #ccc;padding:10px 0 0}
+      .hero{grid-template-columns:1fr}
+      .news-grid{grid-template-columns:repeat(2,1fr)}
+      .footer-grid{grid-template-columns:1fr}
+    }
+    @media(max-width:520px){
+      main{padding:12px}
+      .news-grid{grid-template-columns:1fr}
+      .lead{min-height:280px;padding:20px}
+      .topbar{font-size:12px}
+      nav a{padding:11px 12px;font-size:13px}
+      .section-title h2{font-size:24px}
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="topbar">
+      <div data-lang="date">शनिवार, 15 अगस्त 2026</div>
+      <div data-lang="digital">डिजिटल एडिशन | ताज़ा खबरें</div>
+      <div class="lang-switch" aria-label="Language selector">
+        <button class="lang-btn active" id="hiBtn" onclick="setLanguage('hi')">हिंदी</button>
+        <button class="lang-btn" id="enBtn" onclick="setLanguage('en')">English</button>
+      </div>
+    </div>
+
+    <header class="masthead">
+      <div class="masthead-inner">
+        <div class="mast-photo">
+          <img src="uday-news-photo.jpg" alt="Uday Time News">
+          <div class="photo-caption" data-lang="photo_caption">उदय टाइम न्यूज़\nन्यूज़ डेस्क</div>
+        </div>
+        <div class="mast-copy">
+          <div class="brand">उदय <span>टाइम न्यूज़</span></div>
+          <div class="tagline" data-lang="tagline">सच्ची खबर • तेज़ खबर • आपके शहर की आवाज़</div>
+        </div>
+        <div class="mast-prompt">
+          <strong data-lang="mast_prompt">आपकी आवाज़,<br>आपकी खबर</strong>
+          <span data-lang="mast_prompt_sub">छतरपुर और मध्य प्रदेश की प्रमुख खबरों पर हमारी विशेष नजर</span>
+        </div>
+      </div>
+    </header>
+
+    <nav>
+      <a href="#latest" data-lang="nav_latest">लेटेस्ट न्यूज़</a>
+      <a href="#chhatarpur" data-lang="nav_chhatarpur">छतरपुर</a>
+      <a href="#mp" data-lang="nav_mp">मध्य प्रदेश</a>
+      <a href="#politics" data-lang="nav_politics">राजनीति</a>
+      <a href="#crime" data-lang="nav_crime">अपराध</a>
+      <a href="#jobs" data-lang="nav_jobs">रोजगार</a>
+      <a href="#entertainment" data-lang="nav_entertainment">मनोरंजन</a>
+    </nav>
+
+    <div class="ticker">
+      <b data-lang="breaking">BREAKING</b>
+      <span data-lang="ticker">उदय टाइम न्यूज़ में आपका स्वागत है — ताज़ा स्थानीय और मध्य प्रदेश की खबरें एक जगह।</span>
+    </div>
+
+    <main>
+      <section class="hero" id="latest">
+        <article class="lead">
+          <span class="label" data-lang="lead_label">मुख्य खबर</span>
+          <h1 data-lang="lead_head">छतरपुर की हर बड़ी खबर अब आपके मोबाइल पर, सबसे पहले</h1>
+          <div class="meta" data-lang="lead_meta">उदय टाइम न्यूज़ डेस्क • 15 अगस्त 2026</div>
+        </article>
+
+        <div class="side">
+          <article class="side-card">
+            <span class="label" data-lang="side1_label">छतरपुर</span>
+            <h3 data-lang="side1_head">शहर की प्रमुख खबरों पर हमारी विशेष नजर</h3>
+            <p data-lang="side1_p">स्थानीय प्रशासन, बाजार, शिक्षा और जनसमस्याओं की लगातार कवरेज।</p>
+          </article>
+          <article class="side-card">
+            <span class="label" data-lang="side2_label">मध्य प्रदेश</span>
+            <h3 data-lang="side2_head">प्रदेश की राजनीति और बड़ी घोषणाओं पर अपडेट</h3>
+            <p data-lang="side2_p">प्रदेशभर की महत्वपूर्ण खबरें और ताज़ा घटनाक्रम।</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="chhatarpur">
+        <div class="section-title"><h2 data-lang="sec_chhatarpur">छतरपुर</h2><a href="#" data-lang="all_news">सभी खबरें →</a></div>
+        <div class="news-grid">
+          <article class="card"><div class="thumb">फोटो / छतरपुर</div><div class="card-body"><div class="smallmeta">LOCAL • 10 मिनट पहले</div><h3>शहर में विकास कार्यों को लेकर नई पहल</h3><p>स्थानीय स्तर पर महत्वपूर्ण कार्यों और नागरिक सुविधाओं की जानकारी।</p></div></article>
+          <article class="card"><div class="thumb">फोटो / प्रशासन</div><div class="card-body"><div class="smallmeta">CITY • 25 मिनट पहले</div><h3>प्रशासन ने जारी किए नए दिशा-निर्देश</h3><p>नागरिकों के लिए जरूरी अपडेट और प्रशासनिक जानकारी।</p></div></article>
+          <article class="card"><div class="thumb">फोटो / बाजार</div><div class="card-body"><div class="smallmeta">BUSINESS • 1 घंटा पहले</div><h3>बाजार में त्योहारी सीजन की तैयारी तेज</h3><p>व्यापारियों और ग्राहकों के लिए बाजार की प्रमुख गतिविधियां।</p></div></article>
+        </div>
+      </section>
+
+      <section id="mp">
+        <div class="section-title"><h2 data-lang="sec_mp">मध्य प्रदेश</h2><a href="#" data-lang="all_news">सभी खबरें →</a></div>
+        <div class="news-grid">
+          <article class="card"><div class="thumb">फोटो / भोपाल</div><div class="card-body"><div class="smallmeta">MP • 2 घंटे पहले</div><h3>प्रदेश में नई योजनाओं पर सरकार का फोकस</h3><p>सरकार की प्रमुख घोषणाएं, योजनाएं और प्रदेश से जुड़े अपडेट।</p></div></article>
+          <article class="card"><div class="thumb">फोटो / शिक्षा</div><div class="card-body"><div class="smallmeta">EDUCATION • 3 घंटे पहले</div><h3>शिक्षा विभाग से जुड़ी महत्वपूर्ण सूचना</h3><p>छात्रों, अभिभावकों और शिक्षकों के लिए जरूरी जानकारी।</p></div></article>
+          <article class="card"><div class="thumb">फोटो / मौसम</div><div class="card-body"><div class="smallmeta">WEATHER • 4 घंटे पहले</div><h3>कई जिलों में मौसम को लेकर अपडेट</h3><p>प्रदेश के मौसम और स्थानीय परिस्थितियों की खबरें।</p></div></article>
+        </div>
+      </section>
+
+      <section id="politics">
+        <div class="section-title"><h2 data-lang="sec_politics">राजनीति</h2><a href="#" data-lang="all_news">सभी खबरें →</a></div>
+        <div class="news-grid">
+          <article class="card"><div class="thumb">फोटो / राजनीति</div><div class="card-body"><div class="smallmeta">POLITICS</div><h3>राजनीतिक गतिविधियां हुईं तेज</h3><p>नेताओं के बयान और स्थानीय राजनीतिक घटनाक्रम का अपडेट।</p></div></article>
+          <article class="card"><div class="thumb">फोटो / विधानसभा</div><div class="card-body"><div class="smallmeta">POLICY</div><h3>नीतिगत फैसलों पर चर्चा जारी</h3><p>प्रदेश और जिले से जुड़े नीतिगत मुद्दों की जानकारी।</p></div></article>
+          <article class="card"><div class="thumb">फोटो / जनसभा</div><div class="card-body"><div class="smallmeta">GROUND REPORT</div><h3>मैदान से राजनीतिक रिपोर्ट</h3><p>जनता की प्रतिक्रिया और प्रमुख मुद्दों पर विशेष रिपोर्ट।</p></div></article>
+        </div>
+      </section>
+
+      <section id="crime">
+        <div class="section-title"><h2 data-lang="sec_crime">अपराध</h2><a href="#" data-lang="all_news">सभी खबरें →</a></div>
+        <div class="news-grid">
+          <article class="card"><div class="thumb">फोटो / पुलिस</div><div class="card-body"><div class="smallmeta">CRIME</div><h3>पुलिस ने मामले में शुरू की जांच</h3><p>कानून-व्यवस्था से जुड़े महत्वपूर्ण घटनाक्रम की खबर।</p></div></article>
+          <article class="card"><div class="thumb">फोटो / जांच</div><div class="card-body"><div class="smallmeta">INVESTIGATION</div><h3>जांच एजेंसियों की कार्रवाई तेज</h3><p>जांच और आधिकारिक कार्रवाई से जुड़े अपडेट।</p></div></article>
+          <article class="card"><div class="thumb">फोटो / सुरक्षा</div><div class="card-body"><div class="smallmeta">SAFETY</div><h3>सुरक्षा को लेकर नई अपील</h3><p>नागरिकों के लिए प्रशासन की महत्वपूर्ण सलाह।</p></div></article>
+        </div>
+      </section>
+
+      <section id="jobs">
+        <div class="section-title"><h2 data-lang="sec_jobs">रोजगार</h2><a href="#" data-lang="all_news">सभी खबरें →</a></div>
+        <div class="news-grid">
+          <article class="card"><div class="thumb">फोटो / नौकरी</div><div class="card-body"><div class="smallmeta">JOBS</div><h3>सरकारी भर्ती की नई जानकारी</h3><p>भर्ती, परीक्षा, आवेदन और रोजगार से जुड़े अपडेट।</p></div></article>
+          <article class="card"><div class="thumb">फोटो / परीक्षा</div><div class="card-body"><div class="smallmeta">EXAM</div><h3>परीक्षा की तैयारी कर रहे युवाओं के लिए खबर</h3><p>परीक्षा तिथियां, नोटिफिकेशन और उपयोगी जानकारी।</p></div></article>
+          <article class="card"><div class="thumb">फोटो / करियर</div><div class="card-body"><div class="smallmeta">CAREER</div><h3>करियर को बेहतर बनाने के आसान तरीके</h3><p>कौशल, करियर विकल्प और अवसरों पर विशेष सामग्री।</p></div></article>
+        </div>
+      </section>
+
+      <section id="entertainment">
+        <div class="section-title"><h2 data-lang="sec_ent">मनोरंजन</h2><a href="#" data-lang="all_news">सभी खबरें →</a></div>
+        <div class="news-grid">
+          <article class="card"><div class="thumb">फोटो / फिल्म</div><div class="card-body"><div class="smallmeta">ENTERTAINMENT</div><h3>फिल्म और ओटीटी की दुनिया से बड़ी खबरें</h3><p>नई फिल्मों, वेब सीरीज और कलाकारों से जुड़े अपडेट।</p></div></article>
+          <article class="card"><div class="thumb">फोटो / संगीत</div><div class="card-body"><div class="smallmeta">MUSIC</div><h3>संगीत की दुनिया में नए प्रोजेक्ट</h3><p>नए गाने, कलाकार और चर्चित संगीत खबरें।</p></div></article>
+          <article class="card"><div class="thumb">फोटो / सितारे</div><div class="card-body"><div class="smallmeta">CELEBRITY</div><h3>सितारों से जुड़ी ताजा खबरें</h3><p>फिल्मी जगत की चर्चित गतिविधियों पर नजर।</p></div></article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-grid">
+        <div>
+          <h3>उदय टाइम न्यूज़</h3>
+          <p>छतरपुर और मध्य प्रदेश की ताज़ा खबरों के लिए आपका डिजिटल न्यूज़ प्लेटफॉर्म।</p>
+        </div>
+        <div>
+          <h3>सेक्शन</h3>
+          <p><a href="#chhatarpur" data-lang="nav_chhatarpur">छतरपुर</a><br><a href="#mp" data-lang="nav_mp">मध्य प्रदेश</a><br><a href="#politics" data-lang="nav_politics">राजनीति</a><br><a href="#crime" data-lang="nav_crime">अपराध</a></p>
+        </div>
+        <div>
+          <h3>अन्य</h3>
+          <p><a href="#jobs" data-lang="nav_jobs">रोजगार</a><br><a href="#entertainment" data-lang="nav_entertainment">मनोरंजन</a><br><a href="#">संपर्क</a><br><a href="#">हमारे बारे में</a></p>
+        </div>
+      </div>
+      <div class="copyright">© 2026 Uday Time News. All rights reserved.</div>
+    </footer>
+  </div>
+
+<script>
+const translations = {
+  hi: {
+    title: "उदय टाइम न्यूज़ | Uday Time News",
+    date: "शनिवार, 15 अगस्त 2026",
+    digital: "डिजिटल एडिशन | ताज़ा खबरें",
+    tagline: "सच्ची खबर • तेज़ खबर • आपके शहर की आवाज़",
+    photo_caption: "उदय टाइम न्यूज़\nन्यूज़ डेस्क",
+    mast_prompt: "आपकी आवाज़,<br>आपकी खबर",
+    mast_prompt_sub: "छतरपुर और मध्य प्रदेश की प्रमुख खबरों पर हमारी विशेष नजर",
+    nav_latest: "लेटेस्ट न्यूज़", nav_chhatarpur: "छतरपुर", nav_mp: "मध्य प्रदेश",
+    nav_politics: "राजनीति", nav_crime: "अपराध", nav_jobs: "रोजगार", nav_entertainment: "मनोरंजन",
+    breaking: "BREAKING",
+    ticker: "उदय टाइम न्यूज़ में आपका स्वागत है — ताज़ा स्थानीय और मध्य प्रदेश की खबरें एक जगह।",
+    lead_label: "मुख्य खबर",
+    lead_head: "छतरपुर की हर बड़ी खबर अब आपके मोबाइल पर, सबसे पहले",
+    lead_meta: "उदय टाइम न्यूज़ डेस्क • 15 अगस्त 2026",
+    side1_label: "छतरपुर", side1_head: "शहर की प्रमुख खबरों पर हमारी विशेष नजर",
+    side1_p: "स्थानीय प्रशासन, बाजार, शिक्षा और जनसमस्याओं की लगातार कवरेज।",
+    side2_label: "मध्य प्रदेश", side2_head: "प्रदेश की राजनीति और बड़ी घोषणाओं पर अपडेट",
+    side2_p: "प्रदेशभर की महत्वपूर्ण खबरें और ताज़ा घटनाक्रम।",
+    sec_chhatarpur:"छतरपुर", sec_mp:"मध्य प्रदेश", sec_politics:"राजनीति",
+    sec_crime:"अपराध", sec_jobs:"रोजगार", sec_ent:"मनोरंजन", all_news:"सभी खबरें →"
+  },
+  en: {
+    title: "Uday Time News | Hindi & English News",
+    date: "Saturday, 15 August 2026",
+    digital: "Digital Edition | Latest News",
+    tagline: "True News • Fast News • Your City’s Voice",
+    photo_caption: "Uday Time News\nNews Desk",
+    mast_prompt: "Your Voice,<br>Your News",
+    mast_prompt_sub: "Our special focus on major news from Chhatarpur and Madhya Pradesh",
+    nav_latest: "Latest News", nav_chhatarpur: "Chhatarpur", nav_mp: "Madhya Pradesh",
+    nav_politics: "Politics", nav_crime: "Crime", nav_jobs: "Jobs", nav_entertainment: "Entertainment",
+    breaking: "BREAKING",
+    ticker: "Welcome to Uday Time News — latest local and Madhya Pradesh news in one place.",
+    lead_label: "TOP STORY",
+    lead_head: "Every major Chhatarpur story, first on your mobile",
+    lead_meta: "Uday Time News Desk • 15 August 2026",
+    side1_label: "CHHATARPUR", side1_head: "Our special focus on the city’s major news",
+    side1_p: "Continuous coverage of local administration, markets, education and civic issues.",
+    side2_label: "MADHYA PRADESH", side2_head: "Updates on state politics and major announcements",
+    side2_p: "Important news and latest developments from across the state.",
+    sec_chhatarpur:"Chhatarpur", sec_mp:"Madhya Pradesh", sec_politics:"Politics",
+    sec_crime:"Crime", sec_jobs:"Jobs", sec_ent:"Entertainment", all_news:"View all →"
+  }
+};
+
+function setLanguage(lang) {
+  const t = translations[lang];
+  document.documentElement.lang = lang === "hi" ? "hi" : "en";
+  document.title = t.title;
+  document.querySelectorAll("[data-lang]").forEach(el => {
+    const key = el.dataset.lang;
+    if (t[key] !== undefined) {
+      if (key === "mast_prompt") el.innerHTML = t[key];
+      else el.textContent = t[key];
+    }
+  });
+  document.getElementById("hiBtn").classList.toggle("active", lang === "hi");
+  document.getElementById("enBtn").classList.toggle("active", lang === "en");
+  localStorage.setItem("udayLanguage", lang);
+}
+setLanguage(localStorage.getItem("udayLanguage") || "hi");
+</script>
+
+</body>
+</html>
